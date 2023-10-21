@@ -1,15 +1,10 @@
 import random
 
-# from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
 def generate_id():
     return "tt" + str(random.randint(9000000, 9999999))
-
-
-# class CustomUser(AbstractUser):
-#     pass
 
 
 class Movie(models.Model):

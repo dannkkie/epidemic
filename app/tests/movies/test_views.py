@@ -111,8 +111,11 @@ def test_get_all_movies(client, add_movie):
 
 @pytest.mark.django_db
 def test_remove_movie(client, add_movie):
-    # Log in as a user first
-    client.login(username="username", password="password")
+    # Create a user
+    user = User.objects.create_user(username="testuser", password="12345")
+
+    # Log the user in
+    client.login(username="testuser", password="12345")
 
     movie = add_movie(
         title="The Big Lebowski",
@@ -135,11 +138,11 @@ def test_remove_movie(client, add_movie):
 
 @pytest.mark.django_db
 def test_remove_movie_incorrect_id(client):
-     # Create a user
-    user = User.objects.create_user(username='testuser', password='12345')
+    # Create a user
+    user = User.objects.create_user(username="testuser", password="12345")
 
-     # Log the user in
-    client.login(username='testuser', password='12345')
+    # Log the user in
+    client.login(username="testuser", password="12345")
 
     resp = client.delete(f"/api/v1/movies/99/")
     assert resp.status_code == 404

@@ -1,3 +1,5 @@
+import os
+
 import requests
 from django.core.management.base import BaseCommand
 
@@ -9,8 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if not Movie.objects.exists():
-            # api_key = os.getenv('API_KEY')
-            api_key = "2a8012e1"
+            api_key = os.getenv("API_KEY")
             if api_key is None:
                 print("Set the API_KEY environment variable")
                 return
